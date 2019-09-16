@@ -1,0 +1,13 @@
+#!/usr/bin/python3
+
+import os
+
+
+##################################################
+# Main Function
+##################################################
+
+if __name__ == "__main__":
+    # NOTE: Uncomment the line below before printing HTML output
+    # print("Content-type: text/html\n\n")
+    pass
