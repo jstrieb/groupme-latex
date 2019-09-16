@@ -1,13 +1,32 @@
 #!/usr/bin/python3
 
 import os
+import json
 
 
 ##################################################
 # Main Function
 ##################################################
 
+def main(data):
+    pass
+
+
 if __name__ == "__main__":
     # NOTE: Uncomment the line below before printing HTML output
     # print("Content-type: text/html\n\n")
-    pass
+
+    # Try to get cgi-bin input data, then process it
+    try:
+        # Try to get GET data if possible, otherwise get POST data
+        if os.getenv("QUERY_STRING"):
+            data = os.getenv("QUERY_STRING")
+        else:
+            data = sys.stdin.read()
+
+        # Try to parse the input as JSON. If it works, process it
+        try:
+            data = json.loads(data)
+            main(data)
+        except Exception as e: pass
+    except Exception as e: pass
