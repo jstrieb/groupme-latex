@@ -5,6 +5,16 @@ import json
 
 
 ##################################################
+# Global Macros
+##################################################
+
+API_ADDR = "https://api.groupme.com/v3/bots/post"
+PNG_RESOLUTION = 800
+LATEX_TEMPLATE_PATH = "template.tex"
+LATEX_TEMPLATE_REPLACE_TEXT = "$ equation goes here $"
+
+
+##################################################
 # Helper Functions
 ##################################################
 
@@ -16,6 +26,23 @@ def send(msg, image_path=None):
     image URL to the message that is sent.
     """
     pass # TODO
+
+
+# NOTE: For typical server configurations, the file being written-to (or
+#       its containing folder) must have permissions 666
+def write_file(path, text):
+    with open(path, "w") as f:
+        f.write(text)
+
+def latex_doc(equation):
+    """Load the LaTeX template from the global macro path, add the input
+    equation to its appropriate place in the middle, and return the text to be
+    compiled as a string.
+    """
+    with open(LATEX_TEMPLATE_PATH, "r") as f:
+        template = f.read()
+
+    return template.replace(LATEX_TEMPLATE_REPLACE_TEXT, equation)
 
 
 ##################################################
