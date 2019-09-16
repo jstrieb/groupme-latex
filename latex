@@ -2,6 +2,9 @@
 
 import os
 import json
+import time
+import shlex
+import subprocess
 
 
 ##################################################
@@ -12,6 +15,7 @@ API_ADDR = "https://api.groupme.com/v3/bots/post"
 PNG_RESOLUTION = 800
 LATEX_TEMPLATE_PATH = "template.tex"
 LATEX_TEMPLATE_REPLACE_TEXT = "$ equation goes here $"
+OUTPUT_PATH = "/var/www/html/latex"
 
 
 ##################################################
@@ -55,7 +59,33 @@ def process_message(data):
     render it as LaTeX locally. Then, attempt to convert to PNG from PDF.
     Finally, send it back to the user in the group chat.
     """
-    pass # TODO
+    text = data.get("text", "")
+
+    # Handle the user asking for help
+    if text.lower() == "help":
+        send("$ enter equation between dollar signs $")
+        return
+
+    # Only continue if the text starts and ends with dollar signs
+    if not (text.startswith("$") and text.endswith("$")): return
+
+    # Write out the standalone document with the user's equation
+    doc = latex_doc(text)
+    t = time.time() # save the time for consistency across later operations
+    path = f"{OUTPUT_PATH}/{t}.tex"
+    write_file(path, doc)
+
+    # Compile the document to PDF using pdfLaTeX
+    latex_cmd = f"pdflatex {t}.tex"
+    subprocess.run(shlex.split(latex_cmd), check=True, cwd=OUTPUT_PATH)
+
+    # Convert the PDF to PNG
+    convert_cmd = (f"pdftoppm {t}.pdf {t} -png -rx {PNG_RESOLUTION} "
+            f"-ry {PNG_RESOLUTION}")
+    subprocess.run(shlex.split(convert_cmd), check=True, cwd=OUTPUT_PATH)
+
+    # Send the converted image to GroupMe
+    send("", image_path=f"{OUTPUT_PATH}/{t}-1.png")
 
 
 def main(data):
