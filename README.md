@@ -21,7 +21,6 @@ Examples to try
 - `$$ \mathrm{Borwein} (n) := \int_0^\infty \prod_{i = 0}^n \frac{\sin (x)}{x} dx $$`
 - A Venn diagram
 
-        ```
         $$$$
         \begin{tikzpicture}
         \begin{scope}[blend group = soft light]
@@ -35,11 +34,9 @@ Examples to try
         \node [font=\Large] {\LaTeX};
         \end{tikzpicture}
         $$$$
-        ```
         
 - A Penrose Triangle
 
-        ```
         $$$$
         \begin{tikzpicture}[scale=1, line join=bevel]
         \pgfmathsetmacro{\a}{2.5}
@@ -66,7 +63,6 @@ Examples to try
         }
         \end{tikzpicture}
         $$$$
-        ```
 
 
 # Quick Start
