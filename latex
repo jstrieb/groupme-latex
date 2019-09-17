@@ -5,6 +5,7 @@ import json
 import time
 import shlex
 import subprocess
+import requests
 
 
 ##################################################
@@ -17,19 +18,39 @@ LATEX_TEMPLATE_PATH = "template.tex"
 LATEX_TEMPLATE_REPLACE_TEXT = "$ equation goes here $"
 OUTPUT_PATH = "/var/www/html/latex"
 
+# XXX: Fill in the following before use
+# Sensitive credentials
+BOT_ID = "[ FILL IN ]"
+API_ACCESS_TOKEN = "[ FILL IN ]"
+SERVER_BASE_URL = "[ FILL IN ]"
+
 
 ##################################################
 # Helper Functions
 ##################################################
 
-def send(msg, image_path=None):
+def send(message, image_path=None):
     """Send message from the bot to the group chat. Limit the size of the sent
     message text to 990 characters based on GroupMe's character limit.
 
     If an image path is included, upload it to GroupMe and attach the proper
     image URL to the message that is sent.
     """
-    pass # TODO
+    data = { "bot_id": BOT_ID, "text": message[:990] }
+
+    if image is not None:
+        # Upload to GroupMe
+        with open(image_path, "rb") as image_data:
+            r = requests.post(url="https://image.groupme.com/pictures",
+                    data=image_data,
+                    headers={ "X-Access-Token": API_ACCESS_TOKEN,
+                        "Content-Type": "application/png" })
+        uploaded_url = j.json()["payload"]["picture_url"]
+
+        # Add uploaded URL to JSON data that will be POSTed
+        data["attachments"] = [ { "type": "image", "url": uploaded_url } ]
+
+    requests.post(API_ADDR, json=data)
 
 
 # NOTE: For typical server configurations, the file being written-to (or
