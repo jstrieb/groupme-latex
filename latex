@@ -85,11 +85,13 @@ def process_message(data):
 
     # Handle the user asking for help
     if text.lower() == "help":
-        send("$ enter equation between dollar signs $")
+        send("$ enter equation between dollar signs $\n"
+                "or [; enter any latex code like this ;]")
         return
 
     # Only continue if the text starts and ends with dollar signs
-    if not (text.startswith("$") and text.endswith("$")): return
+    if not (text.startswith("$") and text.endswith("$") or
+            text.startswith("[;") and text.endswith(";]")): return
 
     # Write out the standalone document with the user's equation
     doc = latex_doc(text)
