@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import os
+import sys
 import json
 import time
 import shlex
@@ -38,14 +39,14 @@ def send(message, image_path=None):
     """
     data = { "bot_id": BOT_ID, "text": message[:990] }
 
-    if image is not None:
+    if image_path is not None:
         # Upload to GroupMe
         with open(image_path, "rb") as image_data:
             r = requests.post(url="https://image.groupme.com/pictures",
                     data=image_data,
                     headers={ "X-Access-Token": API_ACCESS_TOKEN,
                         "Content-Type": "application/png" })
-        uploaded_url = j.json()["payload"]["picture_url"]
+        uploaded_url = r.json()["payload"]["picture_url"]
 
         # Add uploaded URL to JSON data that will be POSTed
         data["attachments"] = [ { "type": "image", "url": uploaded_url } ]
