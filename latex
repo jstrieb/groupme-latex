@@ -90,8 +90,12 @@ def process_message(data):
         return
 
     # Only continue if the text starts and ends with dollar signs
-    if not (text.startswith("$") and text.endswith("$") or
-            text.startswith("[;") and text.endswith(";]")): return
+    if not ((text.startswith("$") and text.endswith("$")) or
+            (text.startswith("[;") and text.endswith(";]"))): return
+
+    # Strip LaTeX identifiers if used
+    if text.startswith("[;") and text.endswith(";]"):
+        text = text.strip("[]; ")
 
     # Write out the standalone document with the user's equation
     doc = latex_doc(text)
@@ -126,7 +130,8 @@ def main(data):
 
 if __name__ == "__main__":
     # NOTE: Uncomment the line below before printing HTML output
-    # print("Content-type: text/html\n\n")
+    print("Content-type: text/html\n\n")
+    print("Nothing to see here")
 
     # Try to get cgi-bin input data, then process it
     try:
