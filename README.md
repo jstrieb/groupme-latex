@@ -20,6 +20,7 @@ Examples to try
 - `help`
 - `$ a^2 + b^2 = c^2 $`
 - `$$ \mathrm{Borwein} (n) := \int_0^\infty \prod_{i = 0}^n \frac{\sin (x)}{x} dx $$`
+- `[; Keep it $\mathbb{R}$ ;]`
 - A Venn diagram
 
         [;
