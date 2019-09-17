@@ -2,9 +2,10 @@
 
 Math is a common topic of many of my group chats, but the lack of inline LaTeX
 rendering makes certain discussions difficult. This bot detects any messages
-which are LaTeX equations (those beginning and ending with `$`), and
-subsequently renders them, sending the output to the group chat as an image.
-The bot can also render short snippets of text, in addition to `tikz` plots.
+which are LaTeX equations (those beginning and ending with `$`, or starting
+with `[;` and ending with `;]`), and subsequently renders them, sending the
+output to the group chat as an image. The bot can also render short snippets of
+text, in addition to `tikz` plots.
 
 The bot runs using Python 3 and is designed to run using `cgi-bin`. It has
 only been tested with `apache2`.
@@ -21,7 +22,7 @@ Examples to try
 - `$$ \mathrm{Borwein} (n) := \int_0^\infty \prod_{i = 0}^n \frac{\sin (x)}{x} dx $$`
 - A Venn diagram
 
-        $$$$
+        [;
         \begin{tikzpicture}
         \begin{scope}[blend group = soft light]
         \fill[red!30!white] ( 90:1.2) circle (2);
@@ -33,11 +34,11 @@ Examples to try
         \node at ( 330:2) {Coding};
         \node [font=\Large] {\LaTeX};
         \end{tikzpicture}
-        $$$$
+        ;]
         
 - A Penrose Triangle
 
-        $$$$
+        [;
         \begin{tikzpicture}[scale=1, line join=bevel]
         \pgfmathsetmacro{\a}{2.5}
         \pgfmathsetmacro{\b}{0.9}
@@ -62,7 +63,7 @@ Examples to try
         \end{scope}
         }
         \end{tikzpicture}
-        $$$$
+        ;]
 
 
 # Quick Start
@@ -94,5 +95,5 @@ Examples to try
   
         sudo apt install texlive texlive-extra-utils poppler-utils
         
-7. Use the bot! Any messages that start and end with `$` will be rendered with
-  LaTeX and sent back as images.
+7. Use the bot! Any messages that start and end with `$` or start with `[;` and
+  end with `;]` will be rendered with LaTeX and sent back as images.
