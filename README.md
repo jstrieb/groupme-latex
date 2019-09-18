@@ -10,6 +10,8 @@ text, in addition to `tikz` plots.
 The bot runs using Python 3 and is designed to run using `cgi-bin`. It has
 only been tested with `apache2`.
 
+Discussed in [/r/math](https://www.reddit.com/r/math/comments/d5hw66/groupme_bot_to_render_latex_equations_and_send/).
+
 
 # Demo & Examples
 
@@ -36,7 +38,7 @@ Examples to try
         \node [font=\Large] {\LaTeX};
         \end{tikzpicture}
         ;]
-        
+
 - A Penrose Triangle
 
         [;
@@ -72,29 +74,29 @@ Examples to try
 1. Change to the `cgi-bin` directory of your web server. For example:
 
         cd /usr/lib/cgi-bin
-        
+
 2. Clone the repository (may need to use `sudo`)
 
         git clone https://github.com/jstrieb/groupme-latex.git
-        
+
 3. Make sure the main `latex` file is marked as executable
 
         sudo chmod +x groupme-latex/latex
-        
+
 4. Get your "bot ID" and "API key" from GroupMe by creating a bot, which can
   be done by following [this tutorial](https://dev.groupme.com/tutorials/bots).
   For the callback URL, use something like the following
-  
+
         http://<server URL>/cgi-bin/groupme-latex/latex
-  
+
 5. Edit the main `latex` file to use the correct `BOT_ID`, `API_ACCESS_TOKEN`,
   and `SERVER_BASE_URL` where the base URL is the location where the `tex`
   files will be output and compiled.
-  
+
 6. Install necessary dependencies. On Ubuntu, this will look something like
   the following
-  
+
         sudo apt install texlive texlive-extra-utils poppler-utils
-        
+
 7. Use the bot! Any messages that start and end with `$` or start with `[;` and
   end with `;]` will be rendered with LaTeX and sent back as images.
