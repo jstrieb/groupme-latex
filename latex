@@ -81,7 +81,7 @@ def process_message(data):
     render it as LaTeX locally. Then, attempt to convert to PNG from PDF.
     Finally, send it back to the user in the group chat.
     """
-    text = data.get("text", "")
+    text = data.get("text", "").strip()
 
     # Handle the user asking for help
     if text.lower() == "help":
