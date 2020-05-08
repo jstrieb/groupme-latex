@@ -100,3 +100,15 @@ Examples to try
 
 7. Use the bot! Any messages that start and end with `$` or start with `[;` and
   end with `;]` will be rendered with LaTeX and sent back as images.
+
+# Disclaimer
+
+This bot writes approximately 1000 bytes of arbitrary data to a file on its
+server. That means anyone in a group with this bot can effectively write files
+to the server the bot runs on. Moreover, the bot does not do any verification
+that the POST request it responds to actually comes from GroupMe and/or the 
+correct group. That means anyone who sees this bot running can write data to
+the server it runs on.
+
+This is a **HUGE** security vulnerability! Do not run this without accepting the
+risks.
