@@ -93,12 +93,22 @@ Examples to try
   and `SERVER_BASE_URL` where the base URL is the location where the `tex`
   files will be output and compiled.
 
-6. Install necessary dependencies. On Ubuntu, this will look something like
+6. Create the folder where the `tex` files will be output and compiled. By
+   default, this is `/var/www/html/latex`. Also give it writable permissions.
+
+        mkdir -p /var/www/html/latex && chmod 777 /var/www/html/latex
+
+7. Upgrade all packages on the system. On Ubuntu, this will look something like
+   the following
+
+        sudo apt update && sudo apt -y upgrade
+
+8. Install necessary dependencies. On Ubuntu, this will look something like
   the following
 
-        sudo apt install texlive texlive-extra-utils poppler-utils
+        sudo apt install texlive texlive-extra-utils texlive-latex-extra texlive-pictures poppler-utils
 
-7. Use the bot! Any messages that start and end with `$` or start with `[;` and
+9. Use the bot! Any messages that start and end with `$` or start with `[;` and
   end with `;]` will be rendered with LaTeX and sent back as images.
 
 # Disclaimer
@@ -106,9 +116,12 @@ Examples to try
 This bot writes approximately 1000 bytes of arbitrary data to a file on its
 server. That means anyone in a group with this bot can effectively write files
 to the server the bot runs on. Moreover, the bot does not do any verification
-that the POST request it responds to actually comes from GroupMe and/or the 
+that the POST request it responds to actually comes from GroupMe and/or the
 correct group. That means anyone who sees this bot running can write data to
 the server it runs on.
 
-This is a **HUGE** security vulnerability! Do not run this without accepting the
-risks.
+Additionally, the default instructions include setting the file permissions on
+the `/var/www/html/latex` directory to `777`, which is probably overkill.
+
+Combined, these represent a **HUGE** security vulnerability! Do not run this
+without accepting the risks.
