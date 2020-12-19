@@ -123,5 +123,10 @@ the server it runs on.
 Additionally, the default instructions include setting the file permissions on
 the `/var/www/html/latex` directory to `777`, which is probably overkill.
 
+Moreover, they run `pdflatex` on arbitrary code, which can allow an attacker
+to read/write arbitrary files using `\input` and run abitrary commands with
+`\immediate\write18`. Do not set this up if you do not want to risk the
+security of your server.
+
 Combined, these represent a **HUGE** security vulnerability! Do not run this
 without accepting the risks.
