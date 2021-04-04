@@ -15,8 +15,15 @@ Discussed in [/r/math](https://www.reddit.com/r/math/comments/d5hw66/groupme_bot
 
 # Demo & Examples
 
+<!--
+
+Unfortunately, this group is out of commission until I get a VPS back up and
+running.
+
 To try out the bot, join the testing group
 [here](https://groupme.com/join_group/53666628/078VgaBr).
+
+-->
 
 Examples to try
 - `help`
